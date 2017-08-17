@@ -1,0 +1,18 @@
+# Spring Properties
+spring:
+  application:
+     name: cycling-stats
+  freemarker:
+    enabled: false     # Ignore Eureka dashboard FreeMarker templates
+  thymeleaf:
+    cache: false       # Allow Thymeleaf templates to be reloaded at runtime
+    prefix: classpath:/cycling-stats/templates/    # Trailing / mandatory
+                       # Template location for this application only
+
+# HTTP Server
+server:
+  port: 8888   # HTTP (Tomcat) port
+
+# Map the error path to error template (for Thymeleaf)
+error:
+  path=/error

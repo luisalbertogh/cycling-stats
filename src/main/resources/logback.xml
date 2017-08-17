@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- configuration file for LogBack (slf4J implementation)
+See here for more details: http://gordondickens.com/wordpress/2013/03/27/sawing-through-the-java-loggers/ -->
+<configuration>
+
+	<!-- STDOUT appender -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Specify logging levels -->
+    <logger name="org.springframework" level="warn"/>
+ 	<logger name="org.jsoup" level="warn"/>
+    <logger name="net.luisalbertogh" level="info"/>
+         
+    <!-- Root logger -->
+    <root level="error">
+        <appender-ref ref="console"/>
+    </root>
+</configuration>
