@@ -48,7 +48,39 @@ public class HtmlParser {
         Map<String, Integer> points = getPoints(doc);
         details.put("Points", points);
         
+        /* Rankings */
+        String pcsRanking = getPCSRanking(doc);
+        String uciRanking = getUCIRanking(doc);
+        details.put("pcsRanking", pcsRanking);
+        details.put("uciRanking", uciRanking);
+        
         return details;
+    }
+    
+    /**
+     * Get UCI ranking.
+     * @param doc - The HTML DOM
+     * @return A string with the ranking
+     */
+    private String getUCIRanking(Document doc){
+        String ranking = "";
+        Elements spans = doc.select("a:contains(UCI World Ranking)");
+        ranking += spans.get(0).parentNode().nextSibling().outerHtml().trim();
+        
+        return ranking;
+    }
+    
+    /**
+     * Get PCS ranking.
+     * @param doc - The HTML DOM
+     * @return A string with the ranking
+     */
+    private String getPCSRanking(Document doc){
+        String ranking = "";
+        Elements spans = doc.select("a:contains(PCS Ranking)");
+        ranking += spans.get(0).parentNode().nextSibling().outerHtml().trim();
+        
+        return ranking;
     }
     
     /**

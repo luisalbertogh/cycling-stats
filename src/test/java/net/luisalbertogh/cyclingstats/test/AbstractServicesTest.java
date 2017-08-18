@@ -3,6 +3,8 @@
  */
 package net.luisalbertogh.cyclingstats.test;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
@@ -25,8 +27,19 @@ public abstract class AbstractServicesTest {
     @SuppressWarnings("deprecation")
     @Test
     public void getRiderDetails(){
-        Rider rider = controller.getRiderDetails("Mikel_Landa");
+        Rider rider = controller.getRiderDetails("Samuel_Sanchez");
         System.out.println(rider);
         Assert.notNull(rider);
+    }
+    
+    /**
+     * Test.
+     */
+    @SuppressWarnings("deprecation")
+    @Test
+    public void getRiderList(){
+        List<Rider> riders = controller.getRidersList("Alberto_Contador,Samuel_Sanchez,Vincenzo_Nibali,Nairo_Quintana");
+        System.out.println(riders);
+        Assert.notEmpty(riders);
     }
 }

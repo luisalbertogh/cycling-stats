@@ -20,6 +20,8 @@ public final class Rider {
     private Integer gc;
     private Integer tt;
     private Integer sprint;
+    private Integer pcsRanking;
+    private Integer uciRanking;
     
     /**
      * Default constructor.
@@ -41,7 +43,7 @@ public final class Rider {
      * @param sprint
      */
     public Rider(String name, String birthDate, String nationality, String weight, String height, Integer odr, Integer gc,
-            Integer tt, Integer sprint) {
+            Integer tt, Integer sprint, Integer pcsRanking, Integer uciRanking) {
         this.name = name;
         this.birthDate = birthDate;
         this.nationality = nationality;
@@ -51,6 +53,8 @@ public final class Rider {
         this.gc = gc;
         this.tt = tt;
         this.sprint = sprint;
+        this.pcsRanking = pcsRanking;
+        this.uciRanking = uciRanking;
     }
     /**
      * @return the name
@@ -163,6 +167,34 @@ public final class Rider {
         this.sprint = sprint;
     }
     
+    /**
+     * @return the pcsRanking
+     */
+    public Integer getPcsRanking() {
+        return pcsRanking;
+    }
+
+    /**
+     * @param pcsRanking the pcsRanking to set
+     */
+    public void setPcsRanking(Integer pcsRanking) {
+        this.pcsRanking = pcsRanking;
+    }
+
+    /**
+     * @return the uciRanking
+     */
+    public Integer getUciRanking() {
+        return uciRanking;
+    }
+
+    /**
+     * @param uciRanking the uciRanking to set
+     */
+    public void setUciRanking(Integer uciRanking) {
+        this.uciRanking = uciRanking;
+    }
+
     @Override
     public String toString(){
         String str = "";
@@ -175,6 +207,8 @@ public final class Rider {
         str += "- GC: " + this.gc + "\n";
         str += "- TT: " + this.tt + "\n";
         str += "- Sprint: " + this.sprint + "\n";
+        str += "- UCI ranking: " + this.uciRanking+ "\n";
+        str += "- PCS ranking: " + this.pcsRanking + "\n";
         
         return str; 
     }
