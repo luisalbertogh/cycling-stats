@@ -11,10 +11,9 @@
 	
 	<!-- Find rider -->
 	<h3>Find rider</h3>
-	<form action="#" th:action="@{/rider}" th:object="${rider}" method="get">
+	<form action="#" th:action="@{/rider}" th:object="${riderForm}" method="get">
 		Name:&nbsp;<input type="text" value="Mikel_landa" th:field="*{name}"/>
-		<input type="submit" name="submit" value="Find"/>
-		<input type="reset" name="reset" value="Clear"/>
+		<input type="submit" name="submit" value="Submit"/>
 	</form>
 	<p/>
 	
@@ -39,7 +38,41 @@
 	</div>
 	
 	<!-- Errors -->
-	<div th:errors="${rider.*}"></div>
+	<div th:errors="${rider.*}" style="color:red"></div>
+	
+	<!-- Find riders -->
+	<h3>Riders list</h3>
+	<form action="#" th:action="@{/findriders}" th:object="${ridersList}" method="get">
+		List (each line, a rider):&nbsp;<textarea name="list" cols="50" rows="20" th:field="*{ridersNames}"></textarea>
+		<select id="classif" th:field="*{classif}">
+			<option th:each="clf : ${allClassifiers}" th:value="${clf.classifier}" th:text="${clf.label}"></option>
+		</select>
+		<p><input type="submit" name="submit" value="Submit"/></p>
+	</form>
+	<p/>
+	
+	<!-- Riders list -->
+	<div th:if="${not #fields.hasErrors('${ridersList.*}') and not #lists.isEmpty(riderResults)}">
+	<table class="table table-striped">
+		<th>Name</th><th>Birthdate</th><th>Nationality</th><th>Weight</th><th>Height</th><th>ODR</th><th>GC</th><th>TT</th><th>Sprint</th><th>UCI Rank.</th><th>PCS Rank.</th>
+		<tr th:each="rider : ${riderResults}">
+			<td th:text="${rider.name}"></td>
+			<td th:text="${rider.birthDate}"></td>
+			<td th:text="${rider.nationality}"></td>
+			<td th:text="${rider.weight}"></td>
+			<td th:text="${rider.height}"></td>
+			<td th:text="${rider.odr}"></td>
+			<td th:text="${rider.gc}"></td>
+			<td th:text="${rider.tt}"></td>
+			<td th:text="${rider.sprint}"></td>
+			<td th:text="${rider.uciRanking}"></td>
+			<td th:text="${rider.pcsRanking}"></td>
+		</tr>
+	</table>
+	</div>
+	
+	<!-- Errors -->
+	<div th:errors="${ridersList.*}" style="color:red"></div>
 	
 	<div th:replace="footer :: copy"></div>
 

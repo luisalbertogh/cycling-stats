@@ -72,7 +72,8 @@ public class CSController {
      * @return The rider details
      */
     @RequestMapping(value = "/rider/{name}", method = RequestMethod.GET, produces = "application/json")
-    public Rider getRiderDetails(@PathVariable("name") String name){
+    @ResponseBody
+    public ResponseEntity<Rider> getRiderDetails(@PathVariable("name") String name){
         Rider rider = new Rider();
         logger.info("Invoking getRiderDetails service...");
         try {
@@ -80,9 +81,10 @@ public class CSController {
         } catch(Exception ex){
             ex.printStackTrace();
             logger.error(ex.getMessage());
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         
-        return rider;
+        return ResponseEntity.ok(rider);
     }
     
     /**
@@ -91,26 +93,38 @@ public class CSController {
      * @return The list of riders
      */
     @RequestMapping(value = "/rider/list", method = RequestMethod.GET, produces = "application/json")
-    public List<Rider> getRidersList(@RequestParam("list") String list){
+    @ResponseBody
+    public ResponseEntity<List<Rider>> getRidersList(@RequestParam("list") String list){
         List<Rider> riders = new ArrayList<>();
         logger.info("Invoking getRidersList service...");
         try {
             /* List not empty */
             if(list != null && !list.equals("")){
-                String[] names = list.split(",");
-                for(String name:names){
-                    Rider rider = getRider(name.trim());
-                    if(rider != null) {
-                        riders.add(rider);
+                String[] names = null;
+                /* Use comma */
+                if(list.indexOf(",") != -1){
+                    names = list.split(",");
+                } 
+                /* Use carriage return */
+                else {
+                    names = list.split("\n");
+                }
+                if(names != null){
+                    for(String name:names){
+                        Rider rider = getRider(name.trim());
+                        if(rider != null) {
+                            riders.add(rider);
+                        }
                     }
                 }
             }
         } catch(Exception ex){
             ex.printStackTrace();
             logger.error(ex.getMessage());
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         
-        return riders;
+        return ResponseEntity.ok(riders);
     }
     
     /**

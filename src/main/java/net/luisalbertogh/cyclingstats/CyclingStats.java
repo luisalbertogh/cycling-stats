@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
 import net.luisalbertogh.cyclingstats.tools.HtmlParser;
+import net.luisalbertogh.cyclingstats.tools.RidersManager;
 
 /**
  * @author loga
@@ -43,5 +44,14 @@ public class CyclingStats {
     @Bean
     protected HtmlParser htmlParser() {
         return new HtmlParser();
+    }
+    
+    /**
+     * Riders manager.
+     * @return
+     */
+    @Bean
+    protected RidersManager ridersManager() {
+        return new RidersManager();
     }
 }
