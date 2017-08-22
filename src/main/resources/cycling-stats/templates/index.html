@@ -1,0 +1,47 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="header :: copy"></head>
+
+<body>
+
+	<h1>Cycling Stats - Home</h1>
+	<h2>Services</h2>
+	
+	<!-- Find rider -->
+	<h3>Find rider</h3>
+	<form action="#" th:action="@{/rider}" th:object="${rider}" method="get">
+		Name:&nbsp;<input type="text" value="Mikel_landa" th:field="*{name}"/>
+		<input type="submit" name="submit" value="Find"/>
+		<input type="reset" name="reset" value="Clear"/>
+	</form>
+	<p/>
+	
+	<!-- Rider details -->
+	<div th:if="${not #fields.hasErrors('${rider.*}') and rider.name != null and rider.name != ''}">
+	<table class="table table-striped">
+		<th>Name</th><th>Birthdate</th><th>Nationality</th><th>Weight</th><th>Height</th><th>ODR</th><th>GC</th><th>TT</th><th>Sprint</th><th>UCI Rank.</th><th>PCS Rank.</th>
+		<tr>
+			<td th:text="${rider.name}"></td>
+			<td th:text="${rider.birthDate}"></td>
+			<td th:text="${rider.nationality}"></td>
+			<td th:text="${rider.weight}"></td>
+			<td th:text="${rider.height}"></td>
+			<td th:text="${rider.odr}"></td>
+			<td th:text="${rider.gc}"></td>
+			<td th:text="${rider.tt}"></td>
+			<td th:text="${rider.sprint}"></td>
+			<td th:text="${rider.uciRanking}"></td>
+			<td th:text="${rider.pcsRanking}"></td>
+		</tr>
+	</table>
+	</div>
+	
+	<!-- Errors -->
+	<div th:errors="${rider.*}"></div>
+	
+	<div th:replace="footer :: copy"></div>
+
+</body>
+</html>

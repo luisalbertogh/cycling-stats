@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -64,16 +65,7 @@ public class CSController {
         headers.add("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:54.0) Gecko/20100101 Firefox/54.0");
         headers.add("Cookie", "__cfduid=d3cd04ce6692ca5ffa7d0884a879ef3671502963235; PHPSESSID=tc07vh9jll5oa8mc07rhqlu9e3; _ga=GA1.2.1146337387.1502963237; _gid=GA1.2.569996841.1502963237; __gads=ID=527d3fb82a7f7d9b:T=1502963236:S=ALNI_MbHEPQzvbWDOzo9diHX9JHMFvXqmA; procyclingstats_cookie_consent=yes");
     }
-    
-    /**
-     * Go home.
-     * @return
-     */
-    @RequestMapping("/")
-    public String home(){
-        return "Relax, you are at home";
-    }    
-    
+        
     /**
      * Get single rider details.
      * @param name The rider name
