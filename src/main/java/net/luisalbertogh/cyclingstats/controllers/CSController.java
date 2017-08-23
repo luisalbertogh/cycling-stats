@@ -8,9 +8,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -50,7 +53,16 @@ public class CSController {
     protected HttpHeaders headers;
         
     /** Base URL */
-    protected static final String URL = "http://www.procyclingstats.com";
+    @Value("${connection.url}")
+    protected String URL;
+    
+    /** The connection cookie */
+    @Value("${connection.cookie}")
+    protected String cookie;
+    
+    /** The connection cookie */
+    @Value("${connection.user-agent}")
+    protected String userAgent;
     
     /**
      * Default constructor.
@@ -58,14 +70,21 @@ public class CSController {
     public CSController(){
         /* Logger */
         logger = LoggerFactory.getLogger(this.getClass());
-                
-        /* Set HTTP headers */
+        
+        /* Set headers */
         headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(MediaType.TEXT_HTML));
-        headers.add("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:54.0) Gecko/20100101 Firefox/54.0");
-        headers.add("Cookie", "__cfduid=d3cd04ce6692ca5ffa7d0884a879ef3671502963235; PHPSESSID=tc07vh9jll5oa8mc07rhqlu9e3; _ga=GA1.2.1146337387.1502963237; _gid=GA1.2.569996841.1502963237; __gads=ID=527d3fb82a7f7d9b:T=1502963236:S=ALNI_MbHEPQzvbWDOzo9diHX9JHMFvXqmA; procyclingstats_cookie_consent=yes");
     }
-        
+
+    /**
+     * Add connection cookie.
+     */
+    @PostConstruct
+    protected void addCookie(){
+        headers.add("User-Agent", userAgent);
+        headers.add("Cookie", cookie);
+    }
+    
     /**
      * Get single rider details.
      * @param name The rider name
