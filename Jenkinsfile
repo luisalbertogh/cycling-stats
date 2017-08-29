@@ -4,7 +4,7 @@ node {
 
     // Checkout 
     stage('Checkout') {
-        // Empty
+        checkout scm
     }
 
     // Build
