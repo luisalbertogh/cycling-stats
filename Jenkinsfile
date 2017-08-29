@@ -19,6 +19,6 @@ node {
 
     // Deploy
     stage('Deploy') {
-        bat "${mvnHome}/bin/mvn deploy"
+        bat "${mvnHome}/bin/mvn deploy -Dmaven.test.skip=true"
     }
 }
